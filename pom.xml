@@ -28,12 +28,6 @@
                     <value>true</value>
                 </property>
             </activation>
-            <!--repositories>
-                <repository>
-                    <id>github</id>
-                    <url>https://maven.pkg.github.com/open-eid/cdoc2-openapi</url>
-                </repository>
-            </repositories-->
 
             <distributionManagement>
                 <repository>
@@ -56,32 +50,18 @@
         <distributionManagement>
             <!-- env variables are available, when run by gitlab CI -->
             <repository>
-                <id>gitlab.ext.cyber.ee</id>
+                <id>${env.CI_SERVER_HOST}</id>
                 <url>${env.CI_SERVER_URL}/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</url>
             </repository>
             <snapshotRepository>
-                <id>gitlab.ext.cyber.ee</id>
+                <id>${env.CI_SERVER_HOST}</id>
                 <url>${env.CI_SERVER_URL}/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</url>
             </snapshotRepository>
         </distributionManagement>
     </profile>
     </profiles>
 
-
-    <!--distributionManagement>
-        <repository>
-            <id>gitlab.ext.cyber.ee</id>
-            <url>https://gitlab.ext.cyber.ee/api/v4/projects/58/packages/maven</url>
-        </repository>
-        <snapshotRepository>
-            <id>gitlab.ext.cyber.ee</id>
-            <url>https://gitlab.ext.cyber.ee/api/v4/projects/58/packages/maven</url>
-        </snapshotRepository>
-    </distributionManagement-->
-
-    <dependencies>
-
-    </dependencies>
+    <dependencies></dependencies>
 
     <build>
         <plugins>
