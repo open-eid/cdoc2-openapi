@@ -2,6 +2,10 @@
 
 Contains OpenAPI specifications for [CDOC2 project](https://open-eid.github.io/CDOC2)
 
+Used for code generation by:
+* https://github.com/open-eid/cdoc2-java-ref-impl
+* https://github.com/open-eid/cdoc2-capsule-server
+
 ## Java
 
 Openapi specification maven artifacts (`packaging=yaml`) can be installed (local `~/.m2` directory) or deployed 
