@@ -102,7 +102,6 @@
                             <source>
                                 try {
                                     println "active profiles: ${project.activeProfiles}"
-                                    println "url: ${url}"
                                     println "project.distributionManagement.repository.id: ${project.distributionManagement.repository.id}"
                                     println "project.distributionManagement.repository.url: ${project.distributionManagement.repository.url}"
                                     //project.getProperties().setProperty('cdoc2-key-capsules-openapi.version', openapi.info.version)
