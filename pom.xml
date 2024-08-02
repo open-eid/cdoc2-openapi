@@ -186,7 +186,7 @@
 
                 <configuration>
                     <!-- skip for cdoc2-openapi pom-->
-                    <skip>false</skip>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
 
