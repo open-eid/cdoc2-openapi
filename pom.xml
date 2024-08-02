@@ -43,41 +43,7 @@
             </distributionManagement>
         </profile>
 
-        <profile>
-        <!-- set gitlab profile active when run by gitlab CI -->
-        <id>gitlab_ci</id>
-        <activation>
-            <property>
-                <name>env.GITLAB_CI</name>
-                <value>true</value>
-            </property>
-        </activation>
-
-        <distributionManagement>
-            <!-- env variables are available, when run by gitlab CI -->
-            <repository>
-                <id>gitlab.ext.cyber.ee</id>
-                <url>${env.CI_SERVER_URL}/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</url>
-            </repository>
-            <snapshotRepository>
-                <id>gitlab.ext.cyber.ee</id>
-                <url>${env.CI_SERVER_URL}/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</url>
-            </snapshotRepository>
-        </distributionManagement>
-    </profile>
     </profiles>
-
-
-    <!--distributionManagement>
-        <repository>
-            <id>gitlab.ext.cyber.ee</id>
-            <url>https://gitlab.ext.cyber.ee/api/v4/projects/58/packages/maven</url>
-        </repository>
-        <snapshotRepository>
-            <id>gitlab.ext.cyber.ee</id>
-            <url>https://gitlab.ext.cyber.ee/api/v4/projects/58/packages/maven</url>
-        </snapshotRepository>
-    </distributionManagement-->
 
     <dependencies>
 
@@ -122,7 +88,6 @@
                             <source>
                                 try {
                                     println "active profiles: ${project.activeProfiles}"
-                                    println "url: ${url}"
                                     println "project.distributionManagement.repository.id: ${project.distributionManagement.repository.id}"
                                     println "project.distributionManagement.repository.url: ${project.distributionManagement.repository.url}"
                                     //project.getProperties().setProperty('cdoc2-key-capsules-openapi.version', openapi.info.version)
