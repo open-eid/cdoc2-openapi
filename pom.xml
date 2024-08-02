@@ -128,14 +128,12 @@
                             <goal>execute</goal>
                         </goals>
                         <configuration>
-                            <source>
-                                import org.yaml.snakeyaml.Yaml
+                            <properties>
 
-                                def yaml = new Yaml()
-                                def openapi = yaml.load(new File('${project.basedir}/cdoc2-key-capsules-openapi.yaml').text)
-                                println "cdoc2-key-capsules-openapi.version: ${openapi.info.version}"
-                                project.getProperties().setProperty('cdoc2-key-capsules-openapi.version', openapi.info.version)
-                            </source>
+                                <buildbasedir>${project.basedir}</buildbasedir>
+                            </properties>
+                            <!-- Path variables on Win are not encoded properly if included directly into pom.xml -->
+                            <source>${project.basedir}/get-openapi-version.groovy</source>
                         </configuration>
                     </execution>
                 </executions>
