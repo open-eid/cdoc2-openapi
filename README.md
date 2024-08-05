@@ -38,6 +38,8 @@ Example `<profile>` section of `settings.xml` for using `cdoc2-openapi`:
 Note: When pulling, the package index is based on the organization level, not the repository level.
 https://stackoverflow.com/questions/63041402/github-packages-single-maven-repository-for-github-organization
 
+So defining single Maven package repo from `open-eid` is enough for pulling cdoc2-* dependencies.
+
 
 Test that `settings.xml` is properly configured:
 ```bash
