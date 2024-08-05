@@ -80,7 +80,7 @@ can be found in maven package repository:
 
 ### Browser
 
-https://github.com/open-eid/cdoc2-openapi/packages
+https://github.com/orgs/open-eid/packages
 
 ## Releasing/Publishing OpenApi using GitHub actions
 
