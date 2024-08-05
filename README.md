@@ -18,6 +18,28 @@ Openapi specification maven artifacts (`packaging=yaml`) can be installed (local
 Configure github package repo access 
 https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry#authenticating-with-a-personal-access-token
 
+Example `<profile>` section of `settings.xml` for using `cdoc2-openapi`:
+```xml
+  <profile>
+      <id>github</id>
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>https://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+          <id>github</id>
+          <url>https://maven.pkg.github.com/open-eid/cdoc2-openapi</url>
+        </repository>
+      </repositories>
+  </profile>
+```
+
+Note: When pulling, the package index is based on the organization level, not the repository level.
+https://stackoverflow.com/questions/63041402/github-packages-single-maven-repository-for-github-organization
+
+
+Test that `settings.xml` is properly configured:
 ```bash
 mvn dependency::get -Dartifact=ee.cyber.cdoc2.openapi:cdoc2-key-capsules-openapi:2.1.0:yaml
 ```
@@ -25,10 +47,28 @@ mvn dependency::get -Dartifact=ee.cyber.cdoc2.openapi:cdoc2-key-capsules-openapi
 Optionally specifying 
 `-DremoteRepositories=github::::https://maven.pkg.github.com/open-eid/cdoc2-openapi`
 
-Copy:
-```bash
-mvn dependency::copy -Dartifact=ee.cyber.cdoc2.openapi:cdoc2-key-capsules-openapi:2.0.0:yaml -DoutputDirectory=./target/openapi
+Or from Maven pom.xml:
+
+```xml
+        <dependency>
+            <groupId>ee.cyber.cdoc2.openapi</groupId>
+            <artifactId>cdoc2-key-capsules-openapi</artifactId>
+            <version>2.1.0</version>
+            <type>yaml</type>
+        </dependency>
 ```
+
+Copy into project directory:
+```bash
+mvn dependency::copy -Dartifact=ee.cyber.cdoc2.openapi:cdoc2-key-capsules-openapi:2.1.0:yaml -DoutputDirectory=./target/openapi
+```
+
+### Usage from Java Maven projects for code generation
+
+See:
+* https://github.com/open-eid/cdoc2-java-ref-impl/blob/master/cdoc2-client/pom.xml
+* https://github.com/open-eid/cdoc2-capsule-server/blob/master/cdoc2-server-openapi/pom.xml
+
 
 
 ## Usage from non-Java projects
@@ -55,7 +95,7 @@ That will trigger `.github/workflows/maven-publish.yml` that will call `mvn depl
 Deploy/publish OpenApi manually:
 `mvn -Dproject.distributionManagement.repository.id=github -Dproject.distributionManagement.repository.url=https://maven.pkg.github.com/open-eid/cdoc2-openapi deploy`
 
-where `project.distributionManagement.repository.id` is <id> under <server> section of settings.xml . 
+where `project.distributionManagement.repository.id` is `<id>` under `<server>` section fo settings.xml . 
 In most cases, this parameter will be required for authentication.
 
 Or use maven deploy:deploy-file directly to deploy single file:
@@ -77,11 +117,6 @@ Refer: https://maven.apache.org/plugins/maven-deploy-plugin/deploy-file-mojo.htm
 mvn dependency:purge-local-repository -DmanualInclude=ee.cyber.cdoc2.openapi:cdoc2-key-capsules-openapi
 ```
 
-## Usage from Java Maven projects for code generation
-
-See:
-* https://github.com/open-eid/cdoc2-java-ref-impl/blob/master/cdoc2-client/pom.xml
-* https://github.com/open-eid/cdoc2-capsule-server/blob/master/cdoc2-server-openapi/pom.xml
 
 
 
