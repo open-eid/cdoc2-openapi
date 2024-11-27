@@ -5,6 +5,7 @@ Contains OpenAPI specifications for [CDOC2 project](https://open-eid.github.io/C
 Used for code generation by:
 * https://github.com/open-eid/cdoc2-java-ref-impl
 * https://github.com/open-eid/cdoc2-capsule-server
+* https://github.com/open-eid/cdoc2-shares-server (WIP)
 
 ## Java
 
@@ -58,11 +59,18 @@ Or from Maven pom.xml:
             <version>2.1.0</version>
             <type>yaml</type>
         </dependency>
+        <dependency>
+            <groupId>ee.cyber.cdoc2.openapi</groupId>
+            <artifactId>cdoc2-key-shares-openapi</artifactId>
+            <version>1.0.0</version>
+        <type>yaml</type>
+        </dependency>
 ```
 
 Copy into project directory:
 ```bash
 mvn dependency::copy -Dartifact=ee.cyber.cdoc2.openapi:cdoc2-key-capsules-openapi:2.1.0:yaml -DoutputDirectory=./target/openapi
+mvn dependency::copy -Dartifact=ee.cyber.cdoc2.openapi:cdoc2-key-shares-openapi:1.0.0:yaml -DoutputDirectory=./target/openapi
 ```
 
 ### Usage from Java Maven projects for code generation
@@ -101,6 +109,8 @@ where `project.distributionManagement.repository.id` is `<id>` under `<server>` 
 In most cases, this parameter will be required for authentication.
 
 Or use maven deploy:deploy-file directly to deploy single file:
+
+cdoc2-key-capsules:
 ```
 mvn deploy:deploy-file \
 -DrepositoryId=github \
@@ -112,11 +122,30 @@ mvn deploy:deploy-file \
 -DartifactId=cdoc2-key-capsules-openapi \
 -Dmaven.deploy.file.skip=false
 ```
+
+cdoc2-key-shares:
+```
+mvn deploy:deploy-file \
+-DrepositoryId=github \
+-Durl=https://maven.pkg.github.com/open-eid/cdoc2-openapi \
+-Dfile=cdoc2-openapi/cdoc2-key-shares-openapi.yaml \
+-Dversion=1.0.0 \
+-Dpackaging=yaml \
+-DgroupId=ee.cyber.cdoc2.openapi \
+-DartifactId=cdoc2-key-shares-openapi \
+-Dmaven.deploy.file.skip=false
+```
 Refer: https://maven.apache.org/plugins/maven-deploy-plugin/deploy-file-mojo.html
 
 ## Delete OpenApi package from local Maven repository
+cdoc2-key-capsules:
 ```
 mvn dependency:purge-local-repository -DmanualInclude=ee.cyber.cdoc2.openapi:cdoc2-key-capsules-openapi
+```
+
+cdoc2-key-shares:
+```
+mvn dependency:purge-local-repository -DmanualInclude=ee.cyber.cdoc2.openapi:cdoc2-key-shares-openapi
 ```
 
 
