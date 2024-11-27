@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ee.cyber.cdoc2</groupId>
-    <version>2.1.0</version>
+    <version>3.0.0</version>
     <artifactId>cdoc2-openapi</artifactId>
     <description>CDOC2 OpenApi specifications</description>
     <packaging>pom</packaging>
@@ -68,8 +68,6 @@
     </profile>
     </profiles>
 
-    <dependencies></dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -85,14 +83,13 @@
                 </dependencies>
                 <executions>
                     <execution>
-                        <id>parse-info.version-from-cdoc2-key-capsules-openapi.yaml</id>
+                        <id>parse-info.version-from-yaml-files</id>
                         <phase>initialize</phase>
                         <goals>
                             <goal>execute</goal>
                         </goals>
                         <configuration>
                             <properties>
-
                                 <buildbasedir>${project.basedir}</buildbasedir>
                             </properties>
                             <!-- Path variables on Win are not encoded properly if included directly into pom.xml -->
@@ -133,12 +130,26 @@
                             <goal>install-file</goal>
                         </goals>
                         <configuration>
-
                             <file>${project.basedir}/cdoc2-key-capsules-openapi.yaml</file>
                             <groupId>ee.cyber.cdoc2.openapi</groupId>
                             <artifactId>cdoc2-key-capsules-openapi</artifactId>
                             <!-- cdoc2-key-capsules-openapi.version value is set by groovy-maven-plugin, parsed from openapi file -->
                             <version>${cdoc2-key-capsules-openapi.version}</version>
+                            <packaging>yaml</packaging>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>deploy-openapi-cdoc2-key-shares</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <file>${project.basedir}/cdoc2-key-shares-openapi.yaml</file>
+                            <groupId>ee.cyber.cdoc2.openapi</groupId>
+                            <artifactId>cdoc2-key-shares-openapi</artifactId>
+                            <!-- cdoc2-key-shares-openapi.version value is set by groovy-maven-plugin, parsed from openapi file -->
+                            <version>${cdoc2-key-shares-openapi.version}</version>
                             <packaging>yaml</packaging>
                         </configuration>
                     </execution>
@@ -163,6 +174,24 @@
                             <artifactId>cdoc2-key-capsules-openapi</artifactId>
                             <!-- cdoc2-key-capsules-openapi.version value is set by groovy-maven-plugin, parsed from openapi file -->
                             <version>${cdoc2-key-capsules-openapi.version}</version>
+                            <packaging>yaml</packaging>
+                            <repositoryId>${project.distributionManagement.repository.id}</repositoryId>
+                            <url>${project.distributionManagement.repository.url}</url>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>deploy-openapi-cdoc2-key-shares</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy-file</goal>
+                        </goals>
+                        <configuration>
+                            <skip>false</skip>
+                            <file>${project.basedir}/cdoc2-key-shares-openapi.yaml</file>
+                            <groupId>ee.cyber.cdoc2.openapi</groupId>
+                            <artifactId>cdoc2-key-shares-openapi</artifactId>
+                            <!-- cdoc2-key-shares-openapi.version value is set by groovy-maven-plugin, parsed from openapi file -->
+                            <version>${cdoc2-key-shares-openapi.version}</version>
                             <packaging>yaml</packaging>
                             <repositoryId>${project.distributionManagement.repository.id}</repositoryId>
                             <url>${project.distributionManagement.repository.url}</url>

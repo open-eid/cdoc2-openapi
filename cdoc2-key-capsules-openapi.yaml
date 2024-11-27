@@ -7,9 +7,10 @@ info:
   description: API for exchanging CDOC2 ephemeral key material in key capsules
 servers:
   - url: 'https://localhost:8443'
-    description: no auth (for creating key capsules)
+    description: no auth (for creating key capsules). Regular TLS (no mutual TLS required).
   - url: 'https://localhost:8444'
     description: mutual TLS authentication (for retrieving key capsules)
+
 paths:
   '/key-capsules/{transactionId}':
     get:
@@ -48,6 +49,7 @@ paths:
       operationId: getCapsuleByTransactionId
       security:
         - mutualTLS: []
+
   /key-capsules:
     post:
       summary: Add Key Capsule
@@ -81,6 +83,7 @@ paths:
       security: []
       tags:
         - cdoc2-key-capsules
+
 components:
   schemas:
     Capsule:
