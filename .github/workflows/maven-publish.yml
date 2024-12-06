@@ -26,6 +26,8 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      run: |
+        mvn deploy -Pdeploy-openapi-cdoc2-key-shares -s $GITHUB_WORKSPACE/settings.xml
+        mvn deploy -Pdeploy-openapi-cdoc2-key-capsules -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
