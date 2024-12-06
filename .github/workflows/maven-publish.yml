@@ -27,7 +27,7 @@ jobs:
 
     - name: Publish to GitHub Packages Apache Maven
       run: |
-        mvn deploy -Pdeploy-openapi-cdoc2-key-shares -s $GITHUB_WORKSPACE/settings.xml
-        mvn deploy -Pdeploy-openapi-cdoc2-key-capsules -s $GITHUB_WORKSPACE/settings.xml
+        mvn deploy -Dexecution.id=deploy-openapi-cdoc2-key-shares -s $GITHUB_WORKSPACE/settings.xml
+        mvn deploy -Dexecution.id=deploy-openapi-cdoc2-key-capsules -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
