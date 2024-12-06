@@ -118,6 +118,31 @@
 
                 </executions>
             </plugin>
+            <!-- if exact RELEASE version of module already exists, -->
+            <!-- then skip deployment by setting maven.deploy.skip=true property for that module -->
+            <!-- GitHub doesn't allow overwriting existing RELEASE modules and deploy will fail with HTTP 409 -->
+            <plugin>
+                <groupId>org.honton.chas</groupId>
+                <artifactId>exists-maven-plugin</artifactId>
+                <version>0.13.0</version>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>remote</goal>
+                        </goals>
+                        <configuration>
+                            <!-- run only if deploy goal is specified in maven command line -->
+                            <requireGoal>deploy</requireGoal>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <failIfNotMatch>false</failIfNotMatch>
+                    <userProperty>true</userProperty>
+                    <!--skip>true</skip-->
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-install-plugin</artifactId>
                 <version>3.1.2</version>
