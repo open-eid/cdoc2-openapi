@@ -4,7 +4,26 @@ info:
     url: http://ria.ee
   title: cdoc2-key-shares
   version: 1.0.1-draft
-  description: API for exchanging CDOC2 key material shares
+  description: |
+    API for exchanging CDOC2 key material shares.
+    
+    `KeyShare` objects defined here are created by splitting cryptographic material required for 
+    encrypting/decrypting CDOC2 document. `KeyShare` objects required for combining original cryptographic material 
+    are stored in CDOC2 header `KeySharesCapsule` [FBS](https://github.com/open-eid/cdoc2-java-ref-impl/blob/master/cdoc2-schema/src/main/fbs/recipients.fbs) object.
+    
+    To access `KeyShare` objects, recipient must authenticate himself by including `x-cdoc2-auth-ticket` 
+    and `x-cdoc2-auth-x5c` headers for `getKeyShareByShareId` operation.
+    
+    * `x-cdoc2-auth-ticket` is sd-jwt defined in WIP https://open-eid.github.io/CDOC2/2.0/ . 
+      Java implementation for `x-cdoc2-auth-ticket` can be found WIP https://github.com/open-eid/cdoc2-auth
+      `x-cdoc2-auth-ticket` is signed by Smart-ID [authentication](https://github.com/SK-EID/smart-id-documentation?tab=readme-ov-file#2310-authentication-session) 
+      certificate or [Mobile-ID authentication](https://github.com/SK-EID/MID?tab=readme-ov-file#32-initiating-signing-and-authentication) certificate.
+    * `x-cdoc2-auth-x5c` is PEM encoded X509 certificate (without newlines) that was used to sign x-cdoc2-auth-ticket. 
+      Certificate holders identify is specified in Subject "serialnumber" field. Example certificate subject: 
+      'serialNumber = PNOEE-30303039914, GN = OK, SN = TESTNUMBER, CN = "TESTNUMBER,OK", C = EE'
+      Certificate full structure is defined in 
+      [Certificate and OCSP Profile for Smart-ID](https://www.skidsolutions.eu/wp-content/uploads/2024/10/SK-CPR-SMART-ID-EN-v4_7-20241127.pdf)
+
 servers:
   - url: 'https://localhost:8443'
     description: Regular TLS (no mutual TLS required).
@@ -38,9 +57,8 @@ paths:
             type: string
           required: true
           description: |
-            PEM encoded X509 certificate (without newlines) that was used to sign X-Cdoc2-Auth-Ticket. 
-            Certificate holders identify is specified in Subject "serialnumber" field. This must match to
-            "kid" in "x-cdoc2-auth-ticket" header. Example certificate subject: 
+            PEM encoded X509 certificate (without newlines) that was used to sign x-cdoc2-auth-ticket. 
+            Certificate holders identify is specified in Subject "serialnumber" field. Example certificate subject: 
             'serialNumber = PNOEE-30303039914, GN = OK, SN = TESTNUMBER, CN = "TESTNUMBER,OK", C = EE'
             Certificate full structure is defined in 
             [Certificate and OCSP Profile for Smart-ID](https://www.skidsolutions.eu/wp-content/uploads/2024/10/SK-CPR-SMART-ID-EN-v4_7-20241127.pdf)
@@ -132,13 +150,16 @@ components:
           format: byte
           minLength: 32
           maxLength: 128
-          description: Key Share. Binary format is yet to be defined [#RM-55912](https://rm-int.cyber.ee/ito/issues/55912)
+          description: | 
+            Base64 encoded Key Share. Binary format. 
+
         recipient:
           type: string
           minLength: 12
           maxLength: 32
           description: |
             Recipient who can download this share. ETSI319412-1. Example "etsi/PNOEE-48010010101". 
+            Must match certificate subject serialnumber field (without "etsi/" prefix).
             In future might support other formats 
             [etsi/:semantics-identifier](https://github.com/SK-EID/smart-id-documentation/blob/v2/README.md#2322-etsisemantics-identifier)
       required:
