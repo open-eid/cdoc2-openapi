@@ -3,7 +3,7 @@ info:
   contact:
     url: http://ria.ee
   title: cdoc2-key-shares
-  version: 1.0.1-draft
+  version: 1.0.1
   description: |
     API for exchanging CDOC2 key material shares.
     
