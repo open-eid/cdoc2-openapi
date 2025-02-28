@@ -50,7 +50,7 @@ paths:
             type: string
           required: true
           description: |
-            SDJWT [Auth ticket WIP](https://gitlab.ext.cyber.ee/cdoc2/cdoc2-documentation/-/blob/RM-2776-authentication-protocol/cdoc2-system-docs/docs/03_system_architecture/ch05_ID_authentication_protocol.md?ref_type=heads#verifying-sd-jwt-verifying-authentication-ticket)
+            SDJWT [Auth ticket WIP](https://github.com/open-eid/CDOC2/blob/master/cdoc2-system-docs/docs/03_system_architecture/ch06_ID_authentication_protocol.md?ref_type=heads#verifying-sd-jwt-verifying-authentication-ticket)
         - name: x-cdoc2-auth-x5c
           in: header
           schema:
