@@ -168,7 +168,7 @@
                             <goal>deploy-file</goal>
                         </goals>
                         <configuration>
-                            <skip>true</skip>
+                            <skip>false</skip>
                             <file>${project.basedir}/cdoc2-key-capsules-openapi.yaml</file>
                             <groupId>ee.cyber.cdoc2.openapi</groupId>
                             <artifactId>cdoc2-key-capsules-openapi</artifactId>

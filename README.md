@@ -5,7 +5,7 @@ Contains OpenAPI specifications for [CDOC2 project](https://open-eid.github.io/C
 Used for code generation by:
 * https://github.com/open-eid/cdoc2-java-ref-impl
 * https://github.com/open-eid/cdoc2-capsule-server
-* https://github.com/open-eid/cdoc2-shares-server (WIP)
+* https://github.com/open-eid/cdoc2-shares-server 
 
 ## Java
 
@@ -44,7 +44,7 @@ So defining single Maven package repo from `open-eid` is enough for pulling cdoc
 
 Test that `settings.xml` is properly configured:
 ```bash
-mvn dependency::get -Dartifact=ee.cyber.cdoc2.openapi:cdoc2-key-capsules-openapi:2.1.0:yaml
+mvn dependency::get -Dartifact=ee.cyber.cdoc2.openapi:cdoc2-key-capsules-openapi:2.2.0:yaml
 ```
 
 Optionally specifying 
@@ -56,7 +56,7 @@ Or from Maven pom.xml:
         <dependency>
             <groupId>ee.cyber.cdoc2.openapi</groupId>
             <artifactId>cdoc2-key-capsules-openapi</artifactId>
-            <version>2.1.0</version>
+            <version>2.2.0</version>
             <type>yaml</type>
         </dependency>
         <dependency>
@@ -69,7 +69,7 @@ Or from Maven pom.xml:
 
 Copy into project directory:
 ```bash
-mvn dependency::copy -Dartifact=ee.cyber.cdoc2.openapi:cdoc2-key-capsules-openapi:2.1.0:yaml -DoutputDirectory=./target/openapi
+mvn dependency::copy -Dartifact=ee.cyber.cdoc2.openapi:cdoc2-key-capsules-openapi:2.2.0:yaml -DoutputDirectory=./target/openapi
 mvn dependency::copy -Dartifact=ee.cyber.cdoc2.openapi:cdoc2-key-shares-openapi:1.0.0:yaml -DoutputDirectory=./target/openapi
 ```
 
