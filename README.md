@@ -110,18 +110,24 @@ In most cases, this parameter will be required for authentication.
 
 Or use maven deploy:deploy-file directly to deploy single file:
 
+* Note: must be executed outside of maven project
+* Note: Because `2.1.0` was published to `https://maven.pkg.github.com/open-eid/cdoc2-capsule-server`, 
+then GH doesn't allow to change package repo to  `open-eid/cdoc2-openapi` - gives `422 Unprocessable Entity`
+
 cdoc2-key-capsules:
 ```
 mvn deploy:deploy-file \
 -DrepositoryId=github \
--Durl=https://maven.pkg.github.com/open-eid/cdoc2-openapi \
+-Durl=https://maven.pkg.github.com/open-eid/cdoc2-capsule-server \
 -Dfile=cdoc2-openapi/cdoc2-key-capsules-openapi.yaml \
--Dversion=2.1.0 \
+-Dversion=2.2.0 \
 -Dpackaging=yaml \
 -DgroupId=ee.cyber.cdoc2.openapi \
 -DartifactId=cdoc2-key-capsules-openapi \
 -Dmaven.deploy.file.skip=false
 ```
+
+
 
 cdoc2-key-shares:
 ```
