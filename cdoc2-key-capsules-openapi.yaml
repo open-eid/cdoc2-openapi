@@ -3,7 +3,7 @@ info:
   contact:
     url: http://ria.ee
   title: cdoc2-key-capsules
-  version: 2.1.0
+  version: 2.2.0
   description: API for exchanging CDOC2 ephemeral key material in key capsules
 servers:
   - url: 'https://localhost:8443'
@@ -78,6 +78,11 @@ paths:
                 type: string
                 example: /key-capsules/KC0123456789ABCDEF
               description: 'URI of created resource. TransactionId can be extracted from URI as it follows pattern /key-capsules/{transactionId}'
+            x-expiry-time:
+              schema:
+                type: string
+                format: date-time
+              description: Key capsule may be deleted by server after expiry time. Format rfc3339#section-5.6
         '400':
           description: Bad request. Client error.
       security: []
