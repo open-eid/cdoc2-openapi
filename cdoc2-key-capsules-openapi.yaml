@@ -3,7 +3,7 @@ info:
   contact:
     url: http://ria.ee
   title: cdoc2-key-capsules
-  version: 2.2.0
+  version: 2.2.1
   description: API for exchanging CDOC2 ephemeral key material in key capsules
 servers:
   - url: 'https://localhost:8443'
@@ -61,7 +61,7 @@ paths:
             format: date-time
           in: header
           name: x-expiry-time
-          description: Key capsule may be deleted by server after expiry time. Format rfc3339#section-5.6
+          description: Expiry time requested (capsule may be deleted after expiry-time). Format rfc3339#section-5.6
           required: false
       requestBody:
         required: true
@@ -78,11 +78,20 @@ paths:
                 type: string
                 example: /key-capsules/KC0123456789ABCDEF
               description: 'URI of created resource. TransactionId can be extracted from URI as it follows pattern /key-capsules/{transactionId}'
-            x-expiry-time:
-              schema:
-                type: string
-                format: date-time
-              description: Key capsule may be deleted by server after expiry time. Format rfc3339#section-5.6
+          x-expiry-time:
+            description: >
+              Actual expiry time applied by the server. Format [RFC 3339 §5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6)
+            schema:
+              type: string
+              format: date-time
+              example: '2025-12-31T23:59:59Z'
+          x-expiry-time-adjusted:
+            description: >
+              Optional. Indicates whether the requested expiry time was adjusted to match the server's maximum limit.  
+              `true` means the server applied a shorter expiry than requested.
+            schema:
+              type: boolean
+              example: true
         '400':
           description: Bad request. Client error.
       security: []
