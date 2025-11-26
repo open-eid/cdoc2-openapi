@@ -123,6 +123,8 @@ components:
              - rsa:
                   * recipient_id is DER encoded RSA recipient public key - RsaPublicKey encoding [RFC8017 RSA Public Key Syntax A.1.1](https://www.rfc-editor.org/rfc/rfc8017#page-54)
                   * ephemeral_key_material contains KEK encrypted with recipient public RSA key
+            
+            This is a extensible enum — servers may add values. Clients MUST tolerate unknown values.
           x-extensible-enum: true
       required:
         - recipient_id
