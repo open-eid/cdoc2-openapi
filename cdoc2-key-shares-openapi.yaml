@@ -139,13 +139,13 @@ paths:
         - cdoc2-key-shares
 
   '/session_nonce':
-    get:
+    post:
       summary: Generates session nonce
       description: |
         Returns a randomly generated nonce value and stores this value in the database for 24 hours
       tags:
         - cdoc2-key-shares
-      operationId: getSessionNonce
+      operationId: generateSessionNonce
       responses:
         '200':
           description: Created
@@ -157,6 +157,14 @@ paths:
           description: 'Bad request. Client error.'
         '403':
           description: 'Authentication failed'
+      requestBody:
+        required: false
+        description: Always empty (OAS doesn't allow post without body, so optional body is defined here)
+        content:
+          application/json:
+            schema: #empty request body
+              type: object
+              nullable: true
 
 components:
   schemas:
