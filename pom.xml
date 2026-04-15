@@ -153,6 +153,36 @@
                             <packaging>yaml</packaging>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>deploy-openapi-cdoc2-auth-server</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <file>${project.basedir}/cdoc2-auth-server-openapi.yaml</file>
+                            <groupId>ee.cyber.cdoc2.openapi</groupId>
+                            <artifactId>cdoc2-auth-server-openapi</artifactId>
+                            <!-- cdoc2-auth-server-openapi.version value is set by groovy-maven-plugin, parsed from openapi file -->
+                            <version>${cdoc2-auth-server-openapi.version}</version>
+                            <packaging>yaml</packaging>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>deploy-openapi-cdoc2-rp-server</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <file>${project.basedir}/cdoc2-rp-server-openapi.yaml</file>
+                            <groupId>ee.cyber.cdoc2.openapi</groupId>
+                            <artifactId>cdoc2-rp-server-openapi</artifactId>
+                            <!-- cdoc2-rp-server-openapi.version value is set by groovy-maven-plugin, parsed from openapi file -->
+                            <version>${cdoc2-rp-server-openapi.version}</version>
+                            <packaging>yaml</packaging>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
 
@@ -192,6 +222,42 @@
                             <artifactId>cdoc2-key-shares-openapi</artifactId>
                             <!-- cdoc2-key-shares-openapi.version value is set by groovy-maven-plugin, parsed from openapi file -->
                             <version>${cdoc2-key-shares-openapi.version}</version>
+                            <packaging>yaml</packaging>
+                            <repositoryId>${project.distributionManagement.repository.id}</repositoryId>
+                            <url>${project.distributionManagement.repository.url}</url>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>deploy-openapi-cdoc2-auth-server</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy-file</goal>
+                        </goals>
+                        <configuration>
+                            <skip>false</skip>
+                            <file>${project.basedir}/cdoc2-auth-server-openapi.yaml</file>
+                            <groupId>ee.cyber.cdoc2.openapi</groupId>
+                            <artifactId>cdoc2-auth-server-openapi</artifactId>
+                            <!-- cdoc2-auth-server-openapi.version value is set by groovy-maven-plugin, parsed from openapi file -->
+                            <version>${cdoc2-auth-server-openapi.version}</version>
+                            <packaging>yaml</packaging>
+                            <repositoryId>${project.distributionManagement.repository.id}</repositoryId>
+                            <url>${project.distributionManagement.repository.url}</url>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>deploy-openapi-cdoc2-rp-server</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy-file</goal>
+                        </goals>
+                        <configuration>
+                            <skip>false</skip>
+                            <file>${project.basedir}/cdoc2-rp-server-openapi.yaml</file>
+                            <groupId>ee.cyber.cdoc2.openapi</groupId>
+                            <artifactId>cdoc2-rp-server-openapi</artifactId>
+                            <!-- cdoc2-rp-server-openapi.version value is set by groovy-maven-plugin, parsed from openapi file -->
+                            <version>${cdoc2-rp-server-openapi.version}</version>
                             <packaging>yaml</packaging>
                             <repositoryId>${project.distributionManagement.repository.id}</repositoryId>
                             <url>${project.distributionManagement.repository.url}</url>
