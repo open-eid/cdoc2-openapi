@@ -3,7 +3,7 @@ info:
   contact:
     url: http://ria.ee
   title: cdoc2-rp-server
-  version: 0.9.0
+  version: 0.9.0-draft
   description: |
     API for RP mediation process and session creation for MID/SID CDOC
 

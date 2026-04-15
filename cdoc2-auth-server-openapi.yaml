@@ -3,7 +3,7 @@ info:
   contact:
     url: http://ria.ee
   title: cdoc2-auth-server
-  version: 0.9.0
+  version: 0.9.0-draft
   description: |
     API for the session creation process for MID/SID CDOC
 
