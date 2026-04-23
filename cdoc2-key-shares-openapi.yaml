@@ -11,14 +11,14 @@ info:
     encrypting/decrypting CDOC2 document. `KeyShare` objects required for combining original cryptographic material 
     are stored in CDOC2 header `KeySharesCapsule` [FBS](https://github.com/open-eid/cdoc2-java-ref-impl/blob/master/cdoc2-schema/src/main/fbs/recipients.fbs) object.
     
-    To access `KeyShare` objects, recipient must authenticate himself by including `x-cdoc2-auth-ticket` 
+    To access `KeyShare` objects, recipient must authenticate himself by including `x-cdoc2-auth-token` 
     and `x-cdoc2-auth-x5c` headers for `getKeyShareByShareId` operation.
     
-    * `x-cdoc2-auth-ticket` is sd-jwt defined in WIP https://open-eid.github.io/CDOC2/2.0/ . 
-      Java implementation for `x-cdoc2-auth-ticket` can be found WIP https://github.com/open-eid/cdoc2-auth
-      `x-cdoc2-auth-ticket` is signed by Smart-ID [authentication](https://github.com/SK-EID/smart-id-documentation?tab=readme-ov-file#2310-authentication-session) 
+    * `x-cdoc2-auth-token` is sd-jwt defined in WIP https://open-eid.github.io/CDOC2/2.0/ . 
+      Java implementation for `x-cdoc2-auth-token` can be found WIP https://github.com/open-eid/cdoc2-auth
+      `x-cdoc2-auth-token` is signed by Smart-ID [authentication](https://github.com/SK-EID/smart-id-documentation?tab=readme-ov-file#2310-authentication-session) 
       certificate or [Mobile-ID authentication](https://github.com/SK-EID/MID?tab=readme-ov-file#32-initiating-signing-and-authentication) certificate.
-    * `x-cdoc2-auth-x5c` is PEM encoded X509 certificate (without newlines) that was used to sign x-cdoc2-auth-ticket. 
+    * `x-cdoc2-auth-x5c` is PEM encoded X509 certificate (without newlines) that was used to sign x-cdoc2-auth-token. 
       Certificate holders identify is specified in Subject "serialnumber" field. Example certificate subject: 
       'serialNumber = PNOEE-30303039914, GN = OK, SN = TESTNUMBER, CN = "TESTNUMBER,OK", C = EE'
       Certificate full structure is defined in 
@@ -44,20 +44,21 @@ paths:
             minLength: 18
             maxLength: 34
           required: true
-        - name: x-cdoc2-auth-ticket
+        - name: x-cdoc2-auth-token
           in: header
           schema:
             type: string
           required: true
           description: |
-            SDJWT [Auth ticket WIP](https://github.com/open-eid/CDOC2/blob/master/cdoc2-system-docs/docs/03_system_architecture/ch06_ID_authentication_protocol.md?ref_type=heads#verifying-sd-jwt-verifying-authentication-ticket)
+            SDJWT [Auth token WIP](https://github
+            .com/open-eid/CDOC2/blob/master/cdoc2-system-docs/docs/03_system_architecture/ch06_ID_authentication_protocol.md?ref_type=heads#verifying-sd-jwt-verifying-authentication-ticket)
         - name: x-cdoc2-auth-x5c
           in: header
           schema:
             type: string
           required: true
           description: |
-            PEM encoded X509 certificate (without newlines) that was used to sign x-cdoc2-auth-ticket. 
+            PEM encoded X509 certificate (without newlines) that was used to sign x-cdoc2-auth-token. 
             Certificate holders identify is specified in Subject "serialnumber" field. Example certificate subject: 
             'serialNumber = PNOEE-30303039914, GN = OK, SN = TESTNUMBER, CN = "TESTNUMBER,OK", C = EE'
             Certificate full structure is defined in 
