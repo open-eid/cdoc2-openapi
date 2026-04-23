@@ -62,6 +62,9 @@ paths:
             'serialNumber = PNOEE-30303039914, GN = OK, SN = TESTNUMBER, CN = "TESTNUMBER,OK", C = EE'
             Certificate full structure is defined in 
             [Certificate and OCSP Profile for Smart-ID](https://www.skidsolutions.eu/wp-content/uploads/2024/10/SK-CPR-SMART-ID-EN-v4_7-20241127.pdf)
+        - $ref: '#/components/parameters/SessionTokenHeader'
+        - $ref: '#/components/parameters/SessionX5cHeader'
+        - $ref: '#/components/parameters/SidRpV3SignatureParams'
       responses:
         '200':
           description: OK
@@ -81,6 +84,9 @@ paths:
       summary: Add Key Share
       description: Save a key share and generate share id using secure random. Generated share is returned in Location header
       operationId: createKeyShare
+      parameters:
+        - $ref: '#/components/parameters/SessionTokenHeader'
+        - $ref: '#/components/parameters/SessionX5cHeader'
       responses:
         '201':
           description: Created
@@ -114,6 +120,8 @@ paths:
             minLength: 18
             maxLength: 34
           required: true
+        - $ref: '#/components/parameters/SessionTokenHeader'
+        - $ref: '#/components/parameters/SessionX5cHeader'
       responses:
         '200':
           description: Created
@@ -204,6 +212,65 @@ components:
           description: 'server nonce for subsequent authentication'
       required:
         - nonce
+
+  parameters:
+    SessionTokenHeader:
+      name: x-cdoc2-session-token
+      in: header
+      required: true
+      schema:
+        type: string
+      description: |
+        SDJWT [Session token WIP](). Signed by cdoc2-auth-server using key identified by 
+        'kid' in JWT header. Contains a MID/SID signature as part of the payload. 'aud' claim
+        contains selectively-disclosed array element identifying a session nonce that is 
+        checked by the server x-cdoc2-session-token is presented to.
+
+    SessionX5cHeader:
+      name: x-cdoc2-session-x5c
+      in: header
+      required: true
+      schema:
+        type: string
+      description: |
+        PEM encoded X509 certificate (without newlines) that was used to 
+        generate the MID/SID signature in x-cdoc2-session-token payload. 
+        Certificate holder's identity is specified in Subject "serialnumber" field. Example certificate subject: 
+        'serialNumber = PNOEE-30303039914, GN = OK, SN = TESTNUMBER, CN = "TESTNUMBER,OK", C = EE'
+        Certificate full structure is defined in 
+        [Certificate and OCSP Profile for Smart-ID](https://www.skidsolutions.eu/wp-content/uploads/2024/10/SK-CPR-SMART-ID-EN-v4_7-20241127.pdf)
+
+    SidRpV3SignatureParams:
+      name: x-cdoc2-sid-rpv3-signature-parameters
+      in: header
+      required: false
+      schema:
+        type: string
+      description: |
+        Base64Url-encoded JSON structure containing additional parameters necessary to verify the
+        signature of an auth token (x-cdoc2-auth-token). Required when the auth token is signed 
+        with SID RPv3, omitted otherwise.
+      example: '{
+  "interactionsDigest": "olJN7OXUvfy1bUPNu712X3A7MOm1BXiWtlAmv+ubIz0=",
+  "interactionTypeUsed": "confirmationMessageAndVerificationCodeChoice",
+  "signature": {
+    "serverRandom": "sV9wlKtZe5tr0gN9ietPSJ/T",
+    "userChallenge": "fykZLrfSkl1on1pHNPkdAYQ-izGt7VFyczyCC3lxrik",
+    "flowType": "Notification",
+    "signatureAlgorithm": "rsassa-pss",
+    "signatureAlgorithmParameters": {
+      "hashAlgorithm": "SHA-256",
+      "maskGenAlgorithm": {
+        "algorithm": "id-mgf1",
+        "parameters": {
+          "hashAlgorithm": "SHA-256"
+        }
+      },
+      "saltLength": 32,
+      "trailerField": "0xbc"
+    }
+  }
+}'
 
   securitySchemes:
     bearerAuth: # for /key-shares endpoints, long-term token
