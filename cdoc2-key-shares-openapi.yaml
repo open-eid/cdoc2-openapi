@@ -3,7 +3,7 @@ info:
   contact:
     url: http://ria.ee
   title: cdoc2-key-shares
-  version: 1.2.0-draft
+  version: 1.2.1-draft
   description: |
     API for exchanging CDOC2 key material shares.
     
@@ -85,9 +85,6 @@ paths:
       summary: Add Key Share
       description: Save a key share and generate share id using secure random. Generated share is returned in Location header
       operationId: createKeyShare
-      parameters:
-        - $ref: '#/components/parameters/SessionTokenHeader'
-        - $ref: '#/components/parameters/SessionX5cHeader'
       responses:
         '201':
           description: Created
