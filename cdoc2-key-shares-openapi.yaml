@@ -18,7 +18,7 @@ info:
       Java implementation for `x-cdoc2-auth-token` can be found WIP https://github.com/open-eid/cdoc2-auth
       `x-cdoc2-auth-token` is signed by Smart-ID [authentication](https://github.com/SK-EID/smart-id-documentation?tab=readme-ov-file#2310-authentication-session) 
       certificate or [Mobile-ID authentication](https://github.com/SK-EID/MID?tab=readme-ov-file#32-initiating-signing-and-authentication) certificate.
-    * `x-cdoc2-auth-x5c` is PEM encoded X509 certificate (without newlines) that was used to sign x-cdoc2-auth-token. 
+    * `x-cdoc2-auth-x5c` is a Base64Url-encoded DER certificate that was used to sign x-cdoc2-auth-token. 
       Certificate holders identify is specified in Subject "serialnumber" field. Example certificate subject: 
       'serialNumber = PNOEE-30303039914, GN = OK, SN = TESTNUMBER, CN = "TESTNUMBER,OK", C = EE'
       Certificate full structure is defined in 
@@ -58,7 +58,7 @@ paths:
             type: string
           required: true
           description: |
-            PEM encoded X509 certificate (without newlines) that was used to sign x-cdoc2-auth-token. 
+            Base64Url-encoded DER certificate that was used to sign x-cdoc2-auth-token. 
             Certificate holders identify is specified in Subject "serialnumber" field. Example certificate subject: 
             'serialNumber = PNOEE-30303039914, GN = OK, SN = TESTNUMBER, CN = "TESTNUMBER,OK", C = EE'
             Certificate full structure is defined in 
@@ -231,8 +231,7 @@ components:
       schema:
         type: string
       description: |
-        PEM encoded X509 certificate (without newlines) that was used to 
-        generate the MID/SID signature in x-cdoc2-session-token payload. 
+        Base64Url-encoded DER certificate that was used to generate the MID/SID signature in x-cdoc2-session-token payload. 
         Certificate holder's identity is specified in Subject "serialnumber" field. Example certificate subject: 
         'serialNumber = PNOEE-30303039914, GN = OK, SN = TESTNUMBER, CN = "TESTNUMBER,OK", C = EE'
         Certificate full structure is defined in 

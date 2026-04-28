@@ -533,8 +533,7 @@ components:
       schema:
         type: string
       description: |
-        PEM encoded X509 certificate (without newlines) that was used to 
-        generate the MID/SID signature in x-cdoc2-session-token payload. 
+        Base64Url-encoded DER certificate that was used to generate the MID/SID signature in x-cdoc2-session-token payload. 
         Certificate holder's identity is specified in Subject "serialnumber" field. Example certificate subject: 
         'serialNumber = PNOEE-30303039914, GN = OK, SN = TESTNUMBER, CN = "TESTNUMBER,OK", C = EE'
         Certificate full structure is defined in 
