@@ -376,28 +376,9 @@ components:
         - SHA3-384
         - SHA3-512
       description: Hash algorithm used for `MGF1`. The hash function for `MGF1` is defined to be the same value as the `hashAlgorithm` parameter value.
-    RelyingPartyUUID:
-      type: string
-      format: uuid
-      description: UUID of Relying Party.
     SemanticsIdentifier:
       type: string
       description: semantics identifier of the authentication subject
-    RelyingPartyName:
-      type: string
-      description: |
-        RP name is a short text string, displayed to the user in the Smart-ID authentication or digital signature consent dialogue. It helps the user to verify that the request is coming from a trusted source. `relyingPartyName` will be displayed on the top of the consent screen, in bold letters.
-
-        `relyingPartyName` **must** be pre-registered with the service provider.
-
-        The following are basic requirements for setting the correct `relyingPartyName`:
-
-        * the name of the company,
-        * the domain name the RP website is using,
-        * a registered trademark associated with the website or app the user is interacting with,
-        * a brand name associated with the website or app the user is interacting with.
-
-        Generic `relyingPartyName` which does not help user to distinguish between different RP-s, **are not accepted** (such as "login", "authentication", etc).
     AuthCertificateLevel:
       type: string
       enum:
@@ -548,8 +529,6 @@ components:
           schema:
             required:
               - semanticsIdentifier
-              - relyingPartyUUID
-              - relyingPartyName
               - signatureProtocol
               - signatureProtocolParameters
               - interactions
@@ -558,10 +537,6 @@ components:
             properties:
               semanticsIdentifier:
                 $ref: '#/components/schemas/SemanticsIdentifier'
-              relyingPartyUUID:
-                $ref: '#/components/schemas/RelyingPartyUUID'
-              relyingPartyName:
-                $ref: '#/components/schemas/RelyingPartyName'
               certificateLevel:
                 $ref: '#/components/schemas/AuthCertificateLevel'
               signatureProtocol:
@@ -594,8 +569,6 @@ components:
   examples:
     SidAuthenticationRequestBodyExample:
       value:
-        relyingPartyUUID: 00000000-0000-4000-8000-000000000000
-        relyingPartyName: DigiDoc4
         certificateLevel: QUALIFIED
         signatureProtocol: ACSP_V2
         signatureProtocolParameters:
