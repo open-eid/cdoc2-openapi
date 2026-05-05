@@ -16,6 +16,10 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <maven-plugin.version>1.0.0</maven-plugin.version>
+        <skipDeployKeyCapsules>false</skipDeployKeyCapsules>
+        <skipDeployKeyShares>false</skipDeployKeyShares>
+        <skipDeployAuthServer>false</skipDeployAuthServer>
+        <skipDeployRpServer>false</skipDeployRpServer>
     </properties>
 
     <profiles>
@@ -45,27 +49,29 @@
         </profile>
 
         <profile>
-        <!-- set gitlab profile active when run by gitlab CI -->
-        <id>gitlab_ci</id>
-        <activation>
-            <property>
-                <name>env.GITLAB_CI</name>
-                <value>true</value>
-            </property>
-        </activation>
+            <!-- set gitlab profile active when run by gitlab CI -->
+            <id>gitlab_ci</id>
+            <activation>
+                <property>
+                    <name>env.GITLAB_CI</name>
+                    <value>true</value>
+                </property>
+            </activation>
 
-        <distributionManagement>
-            <!-- env variables are available, when run by gitlab CI -->
-            <repository>
-                <id>${env.CI_SERVER_HOST}</id>
-                <url>${env.CI_SERVER_URL}/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</url>
-            </repository>
-            <snapshotRepository>
-                <id>${env.CI_SERVER_HOST}</id>
-                <url>${env.CI_SERVER_URL}/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</url>
-            </snapshotRepository>
-        </distributionManagement>
-    </profile>
+            <distributionManagement>
+                <!-- env variables are available, when run by gitlab CI -->
+                <repository>
+                    <id>${env.CI_SERVER_HOST}</id>
+                    <url>${env.CI_SERVER_URL}/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven
+                    </url>
+                </repository>
+                <snapshotRepository>
+                    <id>${env.CI_SERVER_HOST}</id>
+                    <url>${env.CI_SERVER_URL}/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven
+                    </url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
     </profiles>
 
     <build>
@@ -198,14 +204,15 @@
                             <goal>deploy-file</goal>
                         </goals>
                         <configuration>
-                            <skip>false</skip>
+                            <skip>${skipDeployKeyCapsules}</skip>
                             <file>${project.basedir}/cdoc2-key-capsules-openapi.yaml</file>
                             <groupId>ee.cyber.cdoc2.openapi</groupId>
                             <artifactId>cdoc2-key-capsules-openapi</artifactId>
                             <!-- cdoc2-key-capsules-openapi.version value is set by groovy-maven-plugin, parsed from openapi file -->
                             <version>${cdoc2-key-capsules-openapi.version}</version>
                             <packaging>yaml</packaging>
-                            <repositoryId>${project.distributionManagement.repository.id}</repositoryId>
+                            <repositoryId>${project.distributionManagement.repository.id}
+                            </repositoryId>
                             <url>${project.distributionManagement.repository.url}</url>
                         </configuration>
                     </execution>
@@ -216,14 +223,15 @@
                             <goal>deploy-file</goal>
                         </goals>
                         <configuration>
-                            <skip>false</skip>
+                            <skip>${skipDeployKeyShares}</skip>
                             <file>${project.basedir}/cdoc2-key-shares-openapi.yaml</file>
                             <groupId>ee.cyber.cdoc2.openapi</groupId>
                             <artifactId>cdoc2-key-shares-openapi</artifactId>
                             <!-- cdoc2-key-shares-openapi.version value is set by groovy-maven-plugin, parsed from openapi file -->
                             <version>${cdoc2-key-shares-openapi.version}</version>
                             <packaging>yaml</packaging>
-                            <repositoryId>${project.distributionManagement.repository.id}</repositoryId>
+                            <repositoryId>${project.distributionManagement.repository.id}
+                            </repositoryId>
                             <url>${project.distributionManagement.repository.url}</url>
                         </configuration>
                     </execution>
@@ -234,14 +242,15 @@
                             <goal>deploy-file</goal>
                         </goals>
                         <configuration>
-                            <skip>false</skip>
+                            <skip>${skipDeployAuthServer}</skip>
                             <file>${project.basedir}/cdoc2-auth-server-openapi.yaml</file>
                             <groupId>ee.cyber.cdoc2.openapi</groupId>
                             <artifactId>cdoc2-auth-server-openapi</artifactId>
                             <!-- cdoc2-auth-server-openapi.version value is set by groovy-maven-plugin, parsed from openapi file -->
                             <version>${cdoc2-auth-server-openapi.version}</version>
                             <packaging>yaml</packaging>
-                            <repositoryId>${project.distributionManagement.repository.id}</repositoryId>
+                            <repositoryId>${project.distributionManagement.repository.id}
+                            </repositoryId>
                             <url>${project.distributionManagement.repository.url}</url>
                         </configuration>
                     </execution>
@@ -252,14 +261,15 @@
                             <goal>deploy-file</goal>
                         </goals>
                         <configuration>
-                            <skip>false</skip>
+                            <skip>${skipDeployRpServer}</skip>
                             <file>${project.basedir}/cdoc2-rp-server-openapi.yaml</file>
                             <groupId>ee.cyber.cdoc2.openapi</groupId>
                             <artifactId>cdoc2-rp-server-openapi</artifactId>
                             <!-- cdoc2-rp-server-openapi.version value is set by groovy-maven-plugin, parsed from openapi file -->
                             <version>${cdoc2-rp-server-openapi.version}</version>
                             <packaging>yaml</packaging>
-                            <repositoryId>${project.distributionManagement.repository.id}</repositoryId>
+                            <repositoryId>${project.distributionManagement.repository.id}
+                            </repositoryId>
                             <url>${project.distributionManagement.repository.url}</url>
                         </configuration>
                     </execution>
