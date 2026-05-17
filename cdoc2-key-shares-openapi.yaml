@@ -3,7 +3,7 @@ info:
   contact:
     url: http://ria.ee
   title: cdoc2-key-shares
-  version: 1.2.1-draft
+  version: 1.2.2-draft
   description: |
     API for exchanging CDOC2 key material shares.
     
@@ -66,6 +66,10 @@ paths:
         - $ref: '#/components/parameters/SessionTokenHeader'
         - $ref: '#/components/parameters/SessionX5cHeader'
         - $ref: '#/components/parameters/SidRpV3SignatureParams'
+        - $ref: '#/components/parameters/CounterSignSignedHash'
+        - $ref: '#/components/parameters/CounterSignRpName'
+        - $ref: '#/components/parameters/CounterSignSignatureInput'
+        - $ref: '#/components/parameters/CounterSignSignature'
       responses:
         '200':
           description: OK
@@ -268,6 +272,38 @@ components:
     }
   }
 }'
+
+    CounterSignSignedHash:
+      name: x-rp-signed-hash
+      in: header
+      required: false
+      schema:
+        type: string
+      description: component of RFC9421 HTTP signature returned by RP server for MID signatures
+
+    CounterSignRpName:
+      name: x-rp-name
+      in: header
+      required: false
+      schema:
+        type: string
+      description: component of RFC9421 HTTP signature returned by RP server for MID signatures
+
+    CounterSignSignatureInput:
+      name: Signature-Input
+      in: header
+      required: false
+      schema:
+        type: string
+      description: RFC9421 HTTP signature Signature-Input
+
+    CounterSignSignature:
+      name: Signature
+      in: header
+      required: false
+      schema:
+        type: string
+      description: RFC9421 HTTP signature value
 
   securitySchemes:
     bearerAuth: # for /key-shares endpoints, long-term token
