@@ -251,27 +251,28 @@ components:
         Base64Url-encoded JSON structure containing additional parameters necessary to verify the
         signature of an auth token (x-cdoc2-auth-token). Required when the auth token is signed 
         with SID RPv3, omitted otherwise.
-      example: '{
-  "interactionsDigest": "olJN7OXUvfy1bUPNu712X3A7MOm1BXiWtlAmv+ubIz0=",
-  "interactionTypeUsed": "confirmationMessageAndVerificationCodeChoice",
-  "signature": {
-    "serverRandom": "sV9wlKtZe5tr0gN9ietPSJ/T",
-    "userChallenge": "fykZLrfSkl1on1pHNPkdAYQ-izGt7VFyczyCC3lxrik",
-    "flowType": "Notification",
-    "signatureAlgorithm": "rsassa-pss",
-    "signatureAlgorithmParameters": {
-      "hashAlgorithm": "SHA-256",
-      "maskGenAlgorithm": {
-        "algorithm": "id-mgf1",
-        "parameters": {
-          "hashAlgorithm": "SHA-256"
+      example: |
+        {
+          "interactionsDigest": "olJN7OXUvfy1bUPNu712X3A7MOm1BXiWtlAmv+ubIz0=",
+          "interactionTypeUsed": "confirmationMessageAndVerificationCodeChoice",
+          "signature": {
+            "serverRandom": "sV9wlKtZe5tr0gN9ietPSJ/T",
+            "userChallenge": "fykZLrfSkl1on1pHNPkdAYQ-izGt7VFyczyCC3lxrik",
+            "flowType": "Notification",
+            "signatureAlgorithm": "rsassa-pss",
+            "signatureAlgorithmParameters": {
+              "hashAlgorithm": "SHA-256",
+              "maskGenAlgorithm": {
+                "algorithm": "id-mgf1",
+                "parameters": {
+                  "hashAlgorithm": "SHA-256"
+                }
+              },
+              "saltLength": 32,
+              "trailerField": "0xbc"
+            }
+          }
         }
-      },
-      "saltLength": 32,
-      "trailerField": "0xbc"
-    }
-  }
-}'
 
     CounterSignSignedHash:
       name: x-rp-signed-hash
