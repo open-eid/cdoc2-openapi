@@ -3,7 +3,7 @@ info:
   contact:
     url: http://ria.ee
   title: cdoc2-rp-server
-  version: 0.9.0-draft-snapshot
+  version: 0.9.1-draft
   description: |
     API for RP mediation process and session creation for MID/SID CDOC
 
@@ -746,6 +746,27 @@ components:
   responses:
     MidSessionStatusResponse:
       description: OK
+      headers:
+        x-rp-signed-hash:
+          schema:
+            type: string
+          description: 'signed hash'
+          example: 'B+C9XVjIAZnCHH9vfBSv...'
+        x-rp-name:
+          schema:
+            type: string
+          description: 'rp name'
+          example: 'cdoc2-RP.example.ee'
+        Signature-Input:
+          schema:
+            type: string
+          description: 'HTTP Signature-Input header (https://datatracker.ietf.org/doc/rfc9421/)'
+          example: 'sig1=("x-rp-signed-hash" "x-rp-name");created=1715269200;keyid="f4e8b6b4-6a8e-4f77-987c-0957d1dc7f73"'
+        Signature:
+          schema:
+            type: string
+          description: 'HTTP Signature header (https://datatracker.ietf.org/doc/rfc9421/)'
+          example: 'sig1=:<Base64-encoded-signature>:'
       content:
         application/json:
           schema:
