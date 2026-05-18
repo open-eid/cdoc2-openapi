@@ -57,7 +57,7 @@ paths:
           schema:
             type: string
             minLength: 18
-            maxLength: 34
+            maxLength: 36
           required: true
       responses:
         '200':
