@@ -3,7 +3,7 @@ info:
   contact:
     url: http://ria.ee
   title: cdoc2-rp-server
-  version: 0.9.1-draft
+  version: 0.9.2-draft
   description: |
     API for RP mediation process and session creation for MID/SID CDOC
 
@@ -153,6 +153,32 @@ paths:
           description: 'Bad request. Client error.'
         '403':
           description: 'Authentication failed'
+
+  '/info':
+    get:
+      summary: Get server info
+      description: Returns information about the server.
+      operationId: getInfo
+      tags:
+        - cdoc2-rp
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              examples:
+                Server info example:
+                  value:
+                    build:
+                      artifact: cdoc2-rp-server-webapp
+                      name: cdoc2-rp-server-webapp
+                      time: '2026-05-29T07:21:23.869Z'
+                      version: 0.6.0
+                      group: ee.cyber.cdoc2
+                    system.time: '2026-05-29T07:22:50Z'
 
 components:
   schemas:
