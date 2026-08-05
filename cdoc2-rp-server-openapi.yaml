@@ -3,7 +3,7 @@ info:
   contact:
     url: http://ria.ee
   title: cdoc2-rp-server
-  version: 0.9.2-draft
+  version: 0.9.3-draft
   description: |
     API for RP mediation process and session creation for MID/SID CDOC
 
@@ -550,7 +550,9 @@ components:
 
     SemanticsIdentifier:
       type: string
-      description: semantics identifier of the authentication subject
+      description: |
+        semantics identifier of the authentication subject:
+        `PNOEE-48010010101`
     AuthCertificateLevel:
       type: string
       enum:
@@ -630,8 +632,6 @@ components:
         Also used internally by the `rsassa-pss` signature algorithm the as the mask generation algorithm (`MGF1`) hash algorithm.
     InteractionsNotificationBased:
       type: string
-      format: byte
-      contentEncoding: base64
       pattern: ^[a-zA-Z0-9+\/]+={0,2}$
       description: "Base64 encoded representation of a JSON object that lists the supported interaction types.\n\nFollowing interaction types are allowed:\n\n1. `displayTextAndPIN` with `displayText60`\n2. `confirmationMessage` with `displayText200`\n3. `confirmationMessageAndVerificationCodeChoice` with `displayText200`\n\n**Warning!** Serializing a JSON object may produce different byte representations depending on the JSON library or serialization settings. \nCare must be taken to use the exact same Base64-encoded `interactions` object in session initiation and all subsequent calculations.\n\nFor more details, see section [interactions](./interactions.html#interactions).\n"
     RequestProperties:
@@ -691,7 +691,7 @@ components:
         'serialNumber = PNOEE-30303039914, GN = OK, SN = TESTNUMBER, CN = "TESTNUMBER,OK", C = EE'
         Certificate full structure is defined in 
         [Certificate and OCSP Profile for Smart-ID](https://www.skidsolutions.eu/wp-content/uploads/2024/10/SK-CPR-SMART-ID-EN-v4_7-20241127.pdf)
-      
+  
 
   requestBodies:
     MidAuthenticationRequestBody:
