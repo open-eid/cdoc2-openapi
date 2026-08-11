@@ -3,7 +3,7 @@ info:
   contact:
     url: http://ria.ee
   title: cdoc2-auth-server
-  version: 0.9.3-draft
+  version: 0.9.4-draft
   description: |
     API for the session creation process for MID/SID CDOC
 
@@ -139,12 +139,11 @@ components:
             Mobile phone nr
         language:
           type: string
+          minLength: 2
+          maxLength: 2
           description: |
             Language for user-facing messages (e.g. Mobile-ID/Smart-ID prompts).
-          enum:
-            - et
-            - ru
-            - en
+            Follows ISO 639-1 standard
       required:
         - identifier
 
