@@ -82,7 +82,9 @@ paths:
               schema:
                 type: string
                 format: date-time
-              description: Key capsule may be deleted by server after expiry time. Format rfc3339#section-5.6
+              description: >
+                The key share is deleted after this time. UTC
+                [RFC 3339 §5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) `date-time`.
         '400':
           description: 'Bad request. Client error.'
         '401':
@@ -106,7 +108,8 @@ paths:
               description: 'URI of created resource. ShareId can be extracted from URI as it follows pattern /key-shares/{shareId}'
             x-expiry-time:
               description: >
-                Actual expiry time applied by the server. Format [RFC 3339 §5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6)
+                Expiry time applied by the server, the key share is deleted after it. UTC
+                [RFC 3339 §5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) `date-time`.
               schema:
                 type: string
                 format: date-time
@@ -126,7 +129,10 @@ paths:
             format: date-time
           in: header
           name: x-expiry-time
-          description: Expiry time requested (key shares may be deleted after expiry-time). Format rfc3339#section-5.6
+          description: >
+            Requested expiry time, the key share is deleted after it.
+            [RFC 3339 §5.6](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6)
+            `date-time`, always interpreted as UTC, any offset in the value is ignored.
           required: false
       requestBody:
         required: true
