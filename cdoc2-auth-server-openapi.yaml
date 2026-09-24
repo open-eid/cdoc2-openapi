@@ -3,7 +3,7 @@ info:
   contact:
     url: http://ria.ee
   title: cdoc2-auth-server
-  version: 0.9.4-draft
+  version: 0.9.5-draft
   description: |
     API for the session creation process for MID/SID CDOC
 
@@ -166,10 +166,11 @@ components:
       properties:
         status:
           type: string
-          minLength: 1
-          maxLength: 16
+          enum:
+            - STARTED
+            - FAILED
+            - COMPLETE
           description: 'auth process status'
-          example: "COMPLETE"
         endResult:
           type: string
           maxLength: 60
