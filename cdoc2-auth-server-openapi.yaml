@@ -71,7 +71,7 @@ paths:
         '401':
           description: 'Unauthorized. No correct auth headers'
         '404':
-          description: 'Not Found. 404 is also returned, when recipient id in record does not match user id in auth-ticket'
+          description: 'Not Found. 404 is returned when no auth process is found for UUID'
 
   '/.well-known/jwks.jws':
     get:
