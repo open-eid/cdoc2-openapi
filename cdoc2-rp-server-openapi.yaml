@@ -3,7 +3,7 @@ info:
   contact:
     url: http://ria.ee
   title: cdoc2-rp-server
-  version: 0.9.3-draft
+  version: 0.9.4-draft
   description: |
     API for RP mediation process and session creation for MID/SID CDOC
 
@@ -102,6 +102,8 @@ paths:
           description: 'Bad request. Client error.'
         '403':
           description: 'Authentication failed'
+        '404':
+          description: 'Session not found'
 
   '/sid/authenticate':
     post:
@@ -153,6 +155,9 @@ paths:
           description: 'Bad request. Client error.'
         '403':
           description: 'Authentication failed'
+        '404':
+          description: 'Session not found'
+
 
   '/info':
     get:
